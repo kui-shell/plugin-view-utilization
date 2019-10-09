@@ -1,6 +1,6 @@
 {
-  "name": "kubectl-kui",
-  "version": "1.0.0",
+  "name": "plugin-view-utilization",
+  "version": "0.0.1",
   "description": "",
   "main": "node_modules/@kui-shell/core/main/main.js",
   "scripts": {
