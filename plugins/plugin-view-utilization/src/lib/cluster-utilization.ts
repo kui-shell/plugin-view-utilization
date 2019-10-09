@@ -189,8 +189,8 @@ function formatN(nodes: Tables.Table, allPods: Tables.Table): Tables.Table {
 
     const req_cpu_text=cpu_pretty(req_cpu)
     const req_mem_text=mem_pretty(req_mem)
-    const lim_cpu_text=cpu_pretty(lim_mem)
-    const lim_mem_text=mem_pretty(lim_cpu)
+    const lim_cpu_text=cpu_pretty(lim_cpu)
+    const lim_mem_text=mem_pretty(lim_mem)
 
     const percent_req_cpu_text=calc_percentage(req_cpu, alloc_cpu)
     const percent_req_mem_text=calc_percentage(req_mem, alloc_mem)
@@ -198,10 +198,10 @@ function formatN(nodes: Tables.Table, allPods: Tables.Table): Tables.Table {
     const percent_lim_cpu_text=calc_percentage(lim_cpu, alloc_cpu)
     const percent_lim_mem_text=calc_percentage(lim_mem, alloc_mem)
 
-    const percent_lim_cpu_graph=calc_percentage(lim_cpu, alloc_cpu)
-    const percent_lim_mem_graph=calc_percentage(lim_mem, alloc_mem)
+    /* const percent_lim_cpu_graph=alloc_cpu === 0 ? 0 : lim_cpu / alloc_cpu
+    const percent_lim_mem_graph=alloc_mem === 0 ? 0 : lim_mem / alloc_mem
     const percent_lim_cpu_graph_input=percent_lim_cpu_graph
-    const percent_lim_mem_graph_input=percent_lim_mem_graph
+    const percent_lim_mem_graph_input=percent_lim_mem_graph */
 
     return {
       name: node.name,
