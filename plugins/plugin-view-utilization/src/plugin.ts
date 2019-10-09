@@ -19,6 +19,6 @@ import { Commands } from '@kui-shell/core'
 import { nodeUtilization, clusterUtilization } from './lib/cluster-utilization'
 
 export default async (commandTree: Commands.Registrar) => {
-  commandTree.listen('/kask/utilization/cluster', clusterUtilization)
-  commandTree.listen('/kask/utilization/node', nodeUtilization)
+  commandTree.listen('/kask/utilization/cluster', clusterUtilization, { usage: { docs: 'Summarize cluster-level resource utilization metrics' } })
+  commandTree.listen('/kask/utilization/node', nodeUtilization, { usage: { docs: 'Summarize node-level resource utilization metrics' } })
 }
