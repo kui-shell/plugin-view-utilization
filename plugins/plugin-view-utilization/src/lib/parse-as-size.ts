@@ -14,11 +14,20 @@
  * limitations under the License.
  */
 
-import { Commands } from '@kui-shell/core'
+import * as bytes from 'bytes-iec'
 
-import { nodeUtilization, clusterUtilization } from './lib/cluster-utilization'
+export function fromTime(str: string): number {
+  if (/m$/.test(str)) {
+    return parseInt(str.replace(/m$/,''), 10)
+  } else {
+    return parseInt(str, 10) * 1000
+  }
+}
 
-export default async (commandTree: Commands.Registrar) => {
-  commandTree.listen('/kask/utilization/cluster', clusterUtilization)
-  commandTree.listen('/kask/utilization/node', nodeUtilization)
+export function fromSize(str: string): number {
+  return bytes(str.replace(/m/g, 'MB').replace(/Ki/g, 'KiB').replace(/Mi/g, 'MiB').replace(/Gi/g, 'GiB').replace(/Ti/g, 'TiB'))
+}
+
+export default function parseAsSize(str: string): string {
+  return bytes(fromSize(str), {})
 }
