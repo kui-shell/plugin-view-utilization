@@ -186,7 +186,6 @@ function formatN(nodes: Tables.Table, allPods: Tables.Table): Tables.Table {
     const req_mem = sumSize(pods, 4)
     const lim_cpu = sumTime(pods, 5)
     const lim_mem = sumSize(pods, 6)
-    console.error('!!!!!!', alloc_cpu, req_cpu, node)
 
     const req_cpu_text=cpu_pretty(req_cpu)
     const req_mem_text=mem_pretty(req_mem)
@@ -206,6 +205,7 @@ function formatN(nodes: Tables.Table, allPods: Tables.Table): Tables.Table {
 
     return {
       name: node.name,
+      onclick: node.onclick,
       attributes: [
         { value: req_cpu_text },
         { value: percent_req_cpu_text },
