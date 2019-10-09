@@ -1,0 +1,23 @@
+{
+  "name": "@kui-shell/plugin-sample",
+  "version": "1.0.0",
+  "description": "A sample plugin for the Kui",
+  "author": "Nick Mitchell",
+  "license": "Apache-2.0",
+  "keywords": [
+    "kui",
+    "plugin",
+    "sample",
+    "example"
+  ],
+  "main": "dist/plugin.js",
+  "dependencies": {
+    "@kui-shell/core": "^5.0.0",
+    "@kui-shell/plugin-k8s": "^5.0.0",
+    "lorem-ipsum": "^2.0.3",
+    "uuid": "^3.3.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
