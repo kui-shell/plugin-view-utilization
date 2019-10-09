@@ -80,7 +80,6 @@ function format(nodes: Tables.Table, pods: Tables.Table): Tables.Table {
   const req_cpu_text = cpu_pretty(req_cpu)
   const req_mem_text = mem_pretty(req_mem)
   const req_header = 'Requests'
-  console.error('!!!!!!!', req_cpu, pods.body.map(_ => _.attributes[3]))
   // const req_width=calc_max_width(req_header, req_cpu_text, req_mem_text)
 
   const percent_req_cpu_text = calc_percentage(req_cpu, alloc_cpu)
@@ -162,8 +161,72 @@ export async function clusterUtilization({ parsedOptions }: Commands.Arguments):
   return format(nodes, pods)
 }
 
+function formatN(nodes: Tables.Table, allPods: Tables.Table): Tables.Table {
+  const header = {
+    name: 'Node',
+    attributes: [
+      { value: 'CPU Requests' },
+      { value: 'CPU %Requests' },
+      { value: 'CPU Limits' },
+      { value: 'CPU %Limits' },
+      { value: 'Mem Requests' },
+      { value: 'Mem %Requests' },
+      { value: 'Mem Limits' },
+      { value: 'Mem %Limits' }
+    ]
+  }
+
+  const body = nodes.body.map(node => {
+    const ip = node.name
+    const pods = { body: allPods.body.filter(_ => _.attributes[2].value === ip) }
+
+    const alloc_cpu = fromTime(node.attributes[0].value)
+    const alloc_mem = fromSize(node.attributes[1].value)
+    const req_cpu = sumTime(pods, 3)
+    const req_mem = sumSize(pods, 4)
+    const lim_cpu = sumTime(pods, 5)
+    const lim_mem = sumSize(pods, 6)
+    console.error('!!!!!!', alloc_cpu, req_cpu, node)
+
+    const req_cpu_text=cpu_pretty(req_cpu)
+    const req_mem_text=mem_pretty(req_mem)
+    const lim_cpu_text=cpu_pretty(lim_mem)
+    const lim_mem_text=mem_pretty(lim_cpu)
+
+    const percent_req_cpu_text=calc_percentage(req_cpu, alloc_cpu)
+    const percent_req_mem_text=calc_percentage(req_mem, alloc_mem)
+
+    const percent_lim_cpu_text=calc_percentage(lim_cpu, alloc_cpu)
+    const percent_lim_mem_text=calc_percentage(lim_mem, alloc_mem)
+
+    const percent_lim_cpu_graph=calc_percentage(lim_cpu, alloc_cpu)
+    const percent_lim_mem_graph=calc_percentage(lim_mem, alloc_mem)
+    const percent_lim_cpu_graph_input=percent_lim_cpu_graph
+    const percent_lim_mem_graph_input=percent_lim_mem_graph
+
+    return {
+      name: node.name,
+      attributes: [
+        { value: req_cpu_text },
+        { value: percent_req_cpu_text },
+        { value: lim_cpu_text },
+        { value: percent_lim_cpu_text },
+        { value: req_mem_text },
+        { value: percent_req_mem_text },
+        { value: lim_mem_text },
+        { value: percent_lim_mem_text }
+      ]
+    }
+  })
+
+  return {
+    header,
+    body
+  }
+}
+
 export async function nodeUtilization({ parsedOptions }: Commands.Arguments): Promise<Tables.Table> {
   const [ nodes, pods ] = await Promise.all([getNodeData(parsedOptions, true), getPodData(parsedOptions, true)])
 
-  return nodes
+  return formatN(nodes, pods)
 }
