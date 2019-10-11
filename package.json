@@ -11,7 +11,9 @@
     "pty:rebuild": "if [ -d node_modules/node-pty-prebuilt-multiarch ]; then cd node_modules/node-pty-prebuilt-multiarch && npm run install; fi",
     "pty:electron": "if [ -d node_modules/node-pty-prebuilt-multiarch ]; then if [ ! -e node_modules/node-pty-prebuilt-multiarch/.npmrc ]; then cp node_modules/@kui-shell/builder/npmrc node_modules/node-pty-prebuilt-multiarch/.npmrc && npm run pty:rebuild; fi; fi",
     "pty:nodejs": "if [ -e node_modules/node-pty-prebuilt-multiarch/.npmrc ]; then rm -f node_modules/node-pty-prebuilt-multiarch/.npmrc; npm run pty:rebuild; fi",
-    "start": "npm run -s compile && npm run -s pty:electron && electron . shell"
+    "prep": "npm run -s compile && npm run -s pty:electron",
+    "exec": "npm run prep && KUI_HEADLESS=true DEVMODE=true electron . ",
+    "start": "npm run prep && electron . shell"
   },
   "repository": {
     "type": "git",
@@ -21,20 +23,20 @@
   "author": "",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@kui-shell/builder": "5.0.0",
+    "@kui-shell/builder": "5.1.1",
     "@types/bytes": "^3.0.0",
     "@types/mocha": "5.2.7",
-    "@types/node": "12.7.5",
+    "@types/node": "12.7.12",
     "@types/uuid": "^3.4.5",
-    "@types/webdriverio": "^4.13.3",
-    "electron": "6.0.8",
-    "mocha": "6.2.0",
+    "@types/webdriverio": "4.13.1",
+    "electron": "6.0.12",
+    "mocha": "6.2.1",
     "spectron": "8.0.0",
-    "typescript": "3.6.3"
+    "typescript": "3.6.4"
   },
   "dependencies": {
-    "@kui-shell/core": "5.0.0",
-    "@kui-shell/plugin-core-support": "5.0.0",
+    "@kui-shell/core": "5.1.1",
+    "@kui-shell/plugin-core-support": "5.1.1",
     "@kui-shell/plugin-view-utilization": "file:plugins/plugin-view-utilization"
   }
 }
