@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Commands, REPL, Tables } from '@kui-shell/core'
+import { Commands, Tables } from '@kui-shell/core'
 
 import { fromTime, default as parseAsSize } from './parse-as-size'
 
@@ -49,7 +49,9 @@ function parse(data: string, nodeLabel: string, context: string, raw = false): T
   }
 }
 
-export default async function getNodeData(options: Commands.ParsedOptions, raw = false): Promise<Tables.Table> {
+export default async function getNodeData(args: Commands.Arguments, raw = false): Promise<Tables.Table> {
+  const { parsedOptions: options, REPL } = args
+
   const nodeOption = options.l || options.selector || options.label
   const nodeLabel = nodeOption ? `-l ${nodeOption}` : ''
 
