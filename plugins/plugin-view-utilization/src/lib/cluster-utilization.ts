@@ -155,8 +155,8 @@ function format(nodes: Tables.Table, pods: Tables.Table): Tables.Table {
   }
 }
 
-export async function clusterUtilization({ parsedOptions }: Commands.Arguments): Promise<Tables.Table> {
-  const [ nodes, pods ] = await Promise.all([getNodeData(parsedOptions, true), getPodData(parsedOptions, true)])
+export async function clusterUtilization(args: Commands.Arguments): Promise<Tables.Table> {
+  const [ nodes, pods ] = await Promise.all([getNodeData(args, true), getPodData(args, true)])
 
   return format(nodes, pods)
 }
@@ -225,8 +225,8 @@ function formatN(nodes: Tables.Table, allPods: Tables.Table): Tables.Table {
   }
 }
 
-export async function nodeUtilization({ parsedOptions }: Commands.Arguments): Promise<Tables.Table> {
-  const [ nodes, pods ] = await Promise.all([getNodeData(parsedOptions, true), getPodData(parsedOptions, true)])
+export async function nodeUtilization(args: Commands.Arguments): Promise<Tables.Table> {
+  const [ nodes, pods ] = await Promise.all([getNodeData(args, true), getPodData(args, true)])
 
   return formatN(nodes, pods)
 }
