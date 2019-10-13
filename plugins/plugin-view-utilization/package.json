@@ -12,8 +12,8 @@
   ],
   "main": "dist/plugin.js",
   "dependencies": {
-    "@kui-shell/core": "^5.1.4",
-    "@kui-shell/plugin-k8s": "^5.1.4",
+    "@kui-shell/core": "^5.1.5",
+    "@kui-shell/plugin-k8s": "^5.1.5",
     "bytes-iec": "^3.1.0",
     "lorem-ipsum": "^2.0.3",
     "uuid": "^3.3.3"
