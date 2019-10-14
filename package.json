@@ -23,7 +23,7 @@
   "author": "",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@kui-shell/builder": "5.1.5",
+    "@kui-shell/builder": "5.2.0",
     "@types/bytes": "^3.0.0",
     "@types/mocha": "5.2.7",
     "@types/node": "12.7.12",
@@ -35,8 +35,8 @@
     "typescript": "3.6.4"
   },
   "dependencies": {
-    "@kui-shell/core": "5.1.5",
-    "@kui-shell/plugin-core-support": "5.1.5",
+    "@kui-shell/core": "5.2.0",
+    "@kui-shell/plugin-core-support": "5.2.0",
     "@kui-shell/plugin-view-utilization": "file:plugins/plugin-view-utilization"
   }
 }
