@@ -20,5 +20,8 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "krew": {
+    "commandPrefix": "utilization"
   }
 }
