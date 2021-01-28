@@ -29,7 +29,7 @@
     "@types/node": "12.7.12",
     "@types/uuid": "^3.4.5",
     "@types/webdriverio": "4.13.1",
-    "electron": "6.0.12",
+    "electron": "9.4.0",
     "mocha": "6.2.1",
     "spectron": "8.0.0",
     "typescript": "3.6.4"
